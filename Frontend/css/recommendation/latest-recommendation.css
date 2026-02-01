@@ -1,0 +1,175 @@
+/* --- 1. CONFIGURATION (Global & Section Specific) --- */
+:root {
+    /* Variables Warisan (Konsisten dengan kode sebelumnya) */
+    --primary: #2563EB;
+    --accent: #ef4444; /* Merah untuk 'LIVE' atau 'Waktu' */
+    --transition: all 0.3s ease;
+    --radius: 12px;
+
+    /* Light Mode Defaults */
+    --bg-card: #FFFFFF;
+    --bg-btn: #FFFFFF;
+    --text-title: #111827;
+    --text-source: #374151;
+    --border-color: #e5e7eb;
+    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+/* DARK MODE OVERRIDES */
+[data-theme="dark"] {
+    --bg-card: #1E293B;       /* Slate 800 */
+    --bg-btn: #1E293B;        /* Sama dengan card */
+    --text-title: #F8FAFC;    /* Putih */
+    --text-source: #94A3B8;   /* Abu-abu terang */
+    --border-color: #334155;  /* Border lebih gelap */
+    --shadow: 0 4px 10px rgba(0,0,0,0.3); /* Shadow lebih dalam */
+}
+
+/* --- 2. LAYOUT SECTION --- */
+.latest-section { margin-bottom: 3rem; }
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    /* FIXED: Menggunakan variable border */
+    border-bottom: 1px solid var(--border-color);
+    transition: border-color 0.3s ease;
+}
+
+.section-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    position: relative;
+    padding-left: 1rem;
+    color: var(--text-title); /* FIXED: Judul Section jadi putih di dark mode */
+}
+
+.section-title::before {
+    content: ''; position: absolute; left: 0; top: 5px; bottom: 5px;
+    width: 4px; background: var(--primary); border-radius: 4px;
+}
+
+.view-all { font-size: 0.9rem; color: var(--primary); font-weight: 600; text-decoration: none; }
+
+/* --- 3. SCROLL CONTAINER --- */
+.latest-wrapper {
+    position: relative; 
+    display: flex;
+    align-items: center;
+}
+
+.horizontal-scroll {
+    display: flex;
+    gap: 1.5rem;
+    overflow-x: auto;
+    padding-bottom: 1.5rem;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch; 
+    scrollbar-width: none; /* Firefox Hide */
+}
+.horizontal-scroll::-webkit-scrollbar { display: none; /* Chrome Hide */ }
+
+/* --- 4. CARD DESIGN (Dark Mode Ready) --- */
+.latest-card {
+    min-width: 300px;
+    max-width: 300px;
+    
+    /* FIXED: Background & Border Dinamis */
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    color: var(--text-title);
+    
+    border-radius: var(--radius);
+    padding: 1.25rem;
+    box-shadow: var(--shadow);
+    scroll-snap-align: start;
+    transition: var(--transition);
+    display: flex;
+    flex-direction: column;
+}
+
+.latest-card:hover { 
+    border-color: var(--primary); 
+    transform: translateY(-3px); 
+}
+
+.latest-header { 
+    display: flex; justify-content: space-between; 
+    margin-bottom: 0.75rem; font-size: 0.75rem; 
+}
+
+.latest-source { 
+    font-weight: 700; 
+    color: var(--text-source); /* FIXED: Abu-abu yang enak dibaca */
+}
+
+.latest-time { 
+    color: var(--accent); font-weight: 600; 
+    display: flex; align-items: center; gap: 4px; 
+}
+
+.pulse-dot { 
+    width: 6px; height: 6px; 
+    background-color: var(--accent); 
+    border-radius: 50%; 
+    animation: pulse 1.5s infinite; 
+}
+
+.latest-title {
+    font-family: 'Merriweather', serif;
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 1.4;
+    margin-bottom: 0.5rem;
+    
+    color: var(--text-title); /* FIXED: Judul Berita jadi putih */
+    
+    display: -webkit-box; -webkit-line-clamp: 3; 
+    -webkit-box-orient: vertical; overflow: hidden;
+}
+
+/* --- 5. NAVIGATION BUTTONS --- */
+.latest-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    
+    /* FIXED: Tombol menyesuaikan tema */
+    background: var(--bg-btn);
+    border: 1px solid var(--border-color);
+    color: var(--text-title);
+    
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    z-index: 10;
+    transition: all 0.2s ease;
+}
+
+.latest-btn:hover {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+}
+
+.latest-btn:active { transform: translateY(-50%) scale(0.9); }
+
+.prev-latest { left: -20px; }
+.next-latest { right: -20px; }
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .latest-btn { display: none; } /* Hide button di HP */
+    .latest-wrapper { margin: 0 -20px; padding: 0 20px; }
+}
+
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; }
+}

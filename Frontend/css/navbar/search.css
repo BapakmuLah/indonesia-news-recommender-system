@@ -1,0 +1,124 @@
+/* --- SEARCH OVERLAY STYLES --- */
+.search-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.9); /* Latar belakang transparan */
+    backdrop-filter: blur(15px); /* Efek blur di belakang */
+    z-index: 9999; /* Pastikan di paling atas */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    
+    /* State: Hidden by default */
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.4s ease;
+}
+
+/* State: Active (Saat muncul) */
+.search-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Dark Mode Support untuk Overlay */
+[data-theme="dark"] .search-overlay {
+    background: rgba(17, 24, 39, 0.95);
+    color: #fff;
+}
+
+.overlay-content {
+    max-width: 500px;
+    padding: 2rem;
+    transform: translateY(20px);
+    transition: transform 0.4s ease;
+}
+
+.search-overlay.active .overlay-content {
+    transform: translateY(0);
+}
+
+/* --- ANIMASI SCANNER/RADAR --- */
+.scanner-container {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    margin: 0 auto 2rem auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.magnifier {
+    position: relative;
+    z-index: 2;
+    color: var(--primary);
+    animation: float 3s ease-in-out infinite;
+}
+
+.radar-pulse {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: var(--primary);
+    border-radius: 50%;
+    opacity: 0.2;
+    z-index: 1;
+    animation: pulse-ring 2s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+}
+
+.radar-pulse.delay-1 {
+    animation-delay: 0.5s;
+}
+
+/* --- TYPOGRAPHY --- */
+.overlay-title {
+    font-family: 'Merriweather', serif;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: var(--dark);
+}
+
+[data-theme="dark"] .overlay-title { color: #fff; }
+
+.overlay-desc {
+    color: var(--gray);
+    margin-bottom: 2.5rem;
+    line-height: 1.6;
+}
+
+/* --- BUTTON --- */
+.btn-back-home {
+    padding: 0.8rem 2rem;
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all 0.3s;
+    box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+}
+
+.btn-back-home:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4);
+    background-color: #1d4ed8;
+}
+
+/* KEYFRAMES ANIMATION */
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+@keyframes pulse-ring {
+    0% { transform: scale(0.5); opacity: 0; }
+    50% { opacity: 0.3; }
+    100% { transform: scale(1.5); opacity: 0; }
+}

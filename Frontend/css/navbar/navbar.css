@@ -1,0 +1,158 @@
+/* LIGHT MODE */
+:root {
+    --primary: #2563EB;
+    --bg-body: #F3F4F6;
+    --bg-card: #FFFFFF;
+    --text-main: #111827;
+    --text-muted: #6B7280;
+    --border-color: #e5e7eb;
+    --nav-bg: rgba(255, 255, 255, 0.9);
+}
+
+/* DARK MODE */
+[data-theme="dark"] {
+    --bg-body: #0F172A;    
+    --bg-card: #1E293B;
+    --text-main: #E2E8F0;    
+    --text-heading: #F8FAFC;
+    --text-muted: #94A3B8;
+    --gray-medium: #64748B;
+    --border-color: #334155;
+    --nav-bg: rgba(15, 23, 42, 0.95);
+}
+
+.navbar {
+    position: sticky; top: 0; 
+    background: var(--nav-bg);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border-color);
+    padding: 0.8rem 0; 
+    z-index: 1000;
+}
+
+.navbar .container { 
+    max-width: 1200px; /* Lebar standar website, bukan artikel */
+    padding: 0 24px;
+    margin: 0 auto;
+}
+
+.nav-content { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+}
+
+.nav-right-side {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.nav-divider {
+    width: 1px;
+    height: 24px;
+    background-color: var(--border-color);
+}
+
+.nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.nav-links { display: flex; gap: 2rem; }
+.nav-links a { font-weight: 500; font-size: 0.95rem; color: var(--gray); transition: var(--transition); }
+.nav-links a:hover, .nav-links a.active { color: var(--primary); }
+
+.logo { font-family: 'Inter', sans-serif;
+        font-size: 1.5rem; 
+        font-weight: 600; 
+        color: var(--text-heading); 
+        text-decoration: none; 
+        letter-spacing: -1px; 
+}
+.logo span { color: var(--primary); }
+
+.search-box {
+    display: flex; 
+    align-items: center; 
+    background: #f3f4f6;
+    padding: 0.5rem 1rem; 
+    border-radius: 50px; 
+    border: 1px solid transparent;
+}
+
+.search-box {display: flex; align-items: center; background: #f3f4f6;
+             padding: 0.5rem 1rem; border-radius: 50px; border: 1px solid transparent;}
+.search-input { 
+    border: none; 
+    background: transparent; 
+    outline: none; 
+    font-size: 0.9rem; 
+    width: 250px; 
+    color: var(--text-main);
+}
+.search-btn { background: none; border: none; cursor: pointer; color: var(--text-muted); }
+
+/* Tombol Icon (Dark Mode & Bookmark) */
+.icon-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--text-muted);
+    padding: 8px;
+    border-radius: 50%;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.icon-btn:hover {
+    background-color: rgba(0,0,0,0.05);
+    color: var(--primary);
+}
+
+[data-theme="dark"] .icon-btn:hover {
+    background-color: rgba(255,255,255,0.1);
+}
+
+/* Tombol Login */
+.btn-login {
+    text-decoration: None;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--bg-card);
+    background-color: var(--text-main); /* Hitam di light mode, Putih di dark mode */
+    padding: 0.5rem 1.25rem;
+    border-radius: 50px;
+    transition: all 0.3s;
+}
+
+.btn-login:hover {
+    background: rgb(120, 120, 120);
+    opacity: 0.9;
+    transform: translateY(-2px);
+}
+
+.hero-card, .news-card, .latest-card {
+    background: var(--bg-card); /* Gunakan variabel */
+    color: var(--text-main);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); /* Shadow default */
+}
+
+[data-theme="dark"] .hero-card, 
+[data-theme="dark"] .news-card, 
+[data-theme="dark"] .latest-card {
+    box-shadow: none; /* Di dark mode biasanya shadow dihilangkan */
+    border: 1px solid var(--border-color);
+}
+
+.hero-title, .card-title, .latest-title { color: var(--text-main); }
+.hero-summary, .card-summary { color: var(--text-muted); }
+
+/* Update warna input search */
+.search-box {
+    background-color: var(--bg-body); /* Input ikut warna body */
+    border: 1px solid var(--border-color);
+}
+.search-input { color: var(--text-main); }

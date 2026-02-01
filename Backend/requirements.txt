@@ -1,0 +1,11 @@
+fastapi
+uvicorn
+pandas
+numpy
+faiss-cpu
+scikit-learn
+datasets
+cachetools
+pyarrow
+python-dotenv
+google-genai

@@ -1,0 +1,4 @@
+Backend/news_embeddings.faiss
+news-dataset/data.csv
+news-dataset/labeled_data.csv
+news-dataset/labeled_news.csv

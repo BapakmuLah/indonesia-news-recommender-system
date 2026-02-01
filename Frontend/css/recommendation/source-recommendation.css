@@ -1,0 +1,190 @@
+/* --- 1. CONFIGURATION (Source Section Specific) --- */
+:root {
+    /* Variables Warisan */
+    --primary: #2563EB;
+    --radius: 12px;
+    --transition: all 0.3s ease;
+
+    /* Light Mode Variables */
+    --bg-card: #FFFFFF;
+    --border-color: #e5e7eb;
+    
+    /* Warna Tab/Tombol */
+    --tab-bg-idle: #FFFFFF;
+    --tab-text-idle: #64748B; /* Slate 500 */
+    --tab-border-idle: #e5e7eb;
+    
+    --tab-bg-active: #0F172A; /* Hitam Slate 900 */
+    --tab-text-active: #FFFFFF;
+    
+    --nav-btn-bg: #FFFFFF;
+    --nav-icon-color: #0F172A;
+}
+
+/* DARK MODE OVERRIDES */
+[data-theme="dark"] {
+    --bg-card: #1E293B;
+    --border-color: #334155;
+    
+    /* Warna Tab di Dark Mode */
+    --tab-bg-idle: #1E293B;   /* Background gelap */
+    --tab-text-idle: #94A3B8; /* Text abu terang */
+    --tab-border-idle: #334155;
+    
+    --tab-bg-active: #2563EB; /* FIXED: Tombol aktif jadi BIRU agar terlihat */
+    --tab-text-active: #FFFFFF;
+    
+    --nav-btn-bg: #1E293B;
+    --nav-icon-color: #F8FAFC;
+}
+
+/* --- 2. LAYOUT & HEADER --- */
+.source-section { margin-bottom: 4rem; }
+
+.section-header {
+    margin-bottom: 1.5rem;
+    /* Opsional: Jika ingin garis bawah seperti section sebelumnya */
+    /* border-bottom: 1px solid var(--border-color); padding-bottom: 1rem; */
+}
+
+.section-title {
+    font-size: 1.5rem; font-weight: 700;
+    color: var(--text-title, #0F172A); /* Fallback color included */
+}
+
+/* --- 3. TABS CONTAINER (Source Buttons) --- */
+.source-tabs-container {
+    overflow-x: auto;
+    padding-bottom: 0.5rem;
+    margin-bottom: 1.5rem;
+    scrollbar-width: none; 
+}
+.source-tabs-container::-webkit-scrollbar { display: none; }
+
+.source-tabs {
+    display: flex; gap: 10px;
+}
+
+.source-btn {
+    padding: 0.6rem 1.5rem;
+    
+    /* FIXED: Menggunakan Variable Idle */
+    background: var(--tab-bg-idle);
+    border: 1px solid var(--tab-border-idle);
+    color: var(--tab-text-idle);
+    
+    border-radius: 50px; /* Saya buat lebih bulat (pill shape) biar modern */
+    font-size: 0.9rem; font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.2s ease;
+    display: flex; align-items: center; gap: 8px;
+}
+
+.source-btn:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+    transform: translateY(-1px);
+}
+
+.source-btn.active {
+    /* FIXED: Menggunakan Variable Active (Hitam di Light, Biru di Dark) */
+    background-color: var(--tab-bg-active);
+    color: var(--tab-text-active);
+    border-color: var(--tab-bg-active);
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+}
+
+/* --- 4. CAROUSEL WRAPPER --- */
+.source-carousel-wrapper {
+    position: relative;
+    display: flex; align-items: center;
+}
+
+/* --- 5. NEWS GRID (Horizontal Scroll) --- */
+.source-news-grid {
+    display: flex;
+    gap: 1.5rem;
+    overflow-x: auto;
+    padding-bottom: 1.5rem; /* Space for shadow */
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    width: 100%;
+    scrollbar-width: none; 
+}
+.source-news-grid::-webkit-scrollbar { display: none; }
+
+/* Placeholder saat belum pilih sumber */
+.loading-placeholder {
+    width: 100%; text-align: center; padding: 3rem 0;
+    color: var(--tab-text-idle); /* Abu-abu */
+    font-style: italic;
+    background: var(--bg-card); /* Kotak background halus */
+    border-radius: var(--radius);
+    border: 1px dashed var(--border-color);
+}
+
+/* --- 6. NEWS CARD STYLE --- */
+/* Kita pastikan card di dalam grid ini mengikuti style dark mode */
+.source-news-grid .news-card {
+    min-width: 300px;
+    max-width: 300px;
+    scroll-snap-align: start;
+    
+    /* FIXED: Warna Card Adaptif */
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    
+    box-shadow: none; 
+    border-radius: var(--radius);
+    transition: var(--transition);
+    overflow: hidden; /* Biar gambar tidak bocor */
+}
+
+/* Hover Effect pada Card */
+.source-news-grid .news-card:hover {
+    border-color: var(--primary);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+/* --- 7. NAVIGATION BUTTONS --- */
+.source-nav-btn {
+    position: absolute;
+    top: 50%; transform: translateY(-50%);
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    
+    /* FIXED: Warna Tombol Adaptif */
+    background: var(--nav-btn-bg);
+    border: 1px solid var(--border-color);
+    color: var(--nav-icon-color);
+    
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    z-index: 20;
+    transition: all 0.2s ease;
+}
+
+.source-nav-btn:hover {
+    background-color: var(--primary);
+    color: white;
+    border-color: var(--primary);
+    transform: translateY(-50%) scale(1.1);
+}
+
+.prev-source { left: -20px; }
+.next-source { right: -20px; }
+
+/* --- 8. RESPONSIVE --- */
+@media (max-width: 768px) {
+    .source-nav-btn { display: none; } /* Hide tombol nav di HP */
+    .source-carousel-wrapper { margin: 0 -20px; padding: 0 20px; }
+    
+    /* Tab supaya bisa discroll enak di HP */
+    .source-tabs-container {
+        margin-left: -20px; margin-right: -20px;
+        padding-left: 20px; padding-right: 20px;
+    }
+}

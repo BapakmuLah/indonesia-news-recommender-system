@@ -1,0 +1,147 @@
+/* --- 1. CONFIGURATION (Category Specific) --- */
+:root {
+    /* Variables Warisan */
+    --primary: #2563EB;
+    --radius: 12px;
+    
+    /* Variable Select Box Default (Light) */
+    --select-bg: #FFFFFF;
+    --select-text: #111827; /* Hitam */
+    --select-border: #e5e7eb;
+    
+    /* SVG Panah Hitam (untuk Light Mode) */
+    --select-arrow: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%20viewBox%3D%220%200%20292.4%20292.4%22%3E%3Cpath%20fill%3D%22%23111827%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+}
+
+/* DARK MODE OVERRIDES */
+[data-theme="dark"] {
+    --select-bg: #79869b;   /* Slate 800 */
+    --select-text: #F8FAFC; /* Putih */
+    --select-border: #607087;
+    
+    /* SVG Panah Putih (untuk Dark Mode) - Perhatikan fill=%23F8FAFC */
+    --select-arrow: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%20viewBox%3D%220%200%20292.4%20292.4%22%3E%3Cpath%20fill%3D%22%23F8FAFC%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+}
+
+/* --- 2. LAYOUT & SECTION --- */
+.category-section {
+    margin-bottom: 4rem;
+    padding-bottom: 2rem;
+    /* FIXED: Border bawah menyesuaikan tema */
+    border-bottom: 1px solid var(--border-color);
+    transition: border-color 0.3s ease;
+}
+
+/* Header Split: Judul di Kiri, Select di Kanan */
+.section-header-split {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap; 
+    gap: 1rem;
+}
+
+/* --- 3. CUSTOM SELECT DROPDOWN --- */
+.topic-selector-wrapper {
+    position: relative;
+    display: flex; align-items: center;
+}
+
+.select-icon {
+    position: absolute; left: 12px;
+    color: var(--primary); /* Icon filter tetap biru */
+    pointer-events: none; 
+    z-index: 10;
+}
+
+.modern-select {
+    appearance: none; 
+    -webkit-appearance: none;
+    padding: 0.6rem 2.5rem 0.6rem 2.5rem; 
+    font-size: 0.95rem; font-weight: 600;
+    
+    /* FIXED: Menggunakan variable dinamis */
+    color: var(--select-text);
+    background-color: var(--select-bg);
+    border: 1px solid var(--select-border);
+    
+    border-radius: 50px; 
+    cursor: pointer; outline: none;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    transition: all 0.3s ease;
+    min-width: 180px;
+    
+    /* FIXED: Gambar Panah berubah putih di dark mode via variable */
+    background-image: var(--select-arrow);
+    background-repeat: no-repeat;
+    background-position: right .7em top 50%;
+    background-size: .65em auto;
+}
+
+.modern-select:hover, .modern-select:focus {
+    border-color: var(--primary);
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.15);
+}
+
+/* --- 4. CAROUSEL WRAPPER & GRID --- */
+.category-carousel-wrapper {
+    position: relative;
+    display: flex; align-items: center;
+}
+
+.category-news-grid {
+    display: flex;
+    gap: 1.5rem;
+    overflow-x: auto;
+    padding-bottom: 1.5rem;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    width: 100%;
+    scrollbar-width: none;
+}
+.category-news-grid::-webkit-scrollbar { display: none; }
+
+/* Pastikan Card di dalam category grid juga mengikuti tema */
+.category-news-grid .news-card {
+    min-width: 300px;
+    max-width: 300px;
+    scroll-snap-align: start;
+    
+    /* Warna Card */
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    
+    box-shadow: none; 
+    border-radius: var(--radius);
+    transition: var(--transition);
+    overflow: hidden; 
+}
+.category-news-grid .news-card:hover {
+    border-color: var(--primary);
+    transform: translateY(-2px);
+}
+
+/* --- 5. BUTTON POSITIONING --- */
+/* Style tombolnya (.source-nav-btn) sudah kita define di section sebelumnya, 
+   jadi dia otomatis ikut dark mode. Kita tinggal atur posisi saja. */
+.prev-cat { left: -20px; }
+.next-cat { right: -20px; }
+
+/* Placeholder */
+.loading-placeholder {
+    width: 100%; text-align: center; padding: 2rem;
+    color: var(--text-muted, #94A3B8); /* Abu-abu */
+    font-style: italic;
+}
+
+.source-tag{
+    color:var(--select-text);
+    font-weight:600;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .source-nav-btn { display: none; }
+    .category-carousel-wrapper { margin: 0 -20px; padding: 0 20px; }
+}

@@ -1,0 +1,185 @@
+/* --- 1. CSS VARIABLES & THEME CONFIGURATION --- */
+:root {
+    /* DEFAULT (LIGHT MODE) */
+    --primary: #2563EB;      /* Blue 600 */
+    --accent: #2563EB;
+    
+    /* Backgrounds */
+    --bg-body: #ffffff;
+    --bg-card: #F8FAFC;      /* Untuk Source Box di Light Mode */
+    --bg-skeleton: #e2e8f0;
+
+    /* Typography / Text Colors */
+    --text-main: #1e293b;    /* Slate 800 - Enak dibaca di background putih */
+    --text-heading: #0F172A; /* Slate 900 */
+    --text-muted: #64748B;   /* Slate 500 */
+    --text-inverse: #ffffff; /* Untuk text dalam pill/button */
+
+    /* Borders & Accents */
+    --border-color: #E2E8F0;
+    --radius: 12px;
+    --container-width: 760px;
+}
+
+/* OVERRIDE UNTUK DARK MODE */
+[data-theme="dark"] {
+    /* Backgrounds */
+    --bg-body: #0F172A;      /* Slate 900 - Gelap total */
+    --bg-card: #1E293B;      /* Slate 800 - Sedikit lebih terang untuk box */
+    --bg-skeleton: #1e293b;
+
+    /* Typography / Text Colors */
+    --text-main: #CBD5E1;    /* Slate 300 - Terang tapi tidak bikin sakit mata */
+    --text-heading: #F8FAFC; /* Slate 50 - Putih bersih untuk judul */
+    --text-muted: #94A3B8;   /* Slate 400 */
+    
+    /* Borders */
+    --border-color: #334155; /* Border lebih gelap */
+}
+
+/* --- 2. GLOBAL RESET & BODY --- */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    background-color: var(--bg-body);
+    color: var(--text-main);
+    transition: background-color 0.3s ease, color 0.3s ease; /* Transisi halus saat ganti mode */
+    font-family: 'Plus Jakarta Sans', sans-serif; /* Default font jika tidak ada serif */
+}
+
+.container { max-width: var(--container-width); margin: 0 auto; padding: 0 24px; }
+
+/* --- 3. PROGRESS BAR --- */
+.progress-container {
+    position: fixed; top: 0; left: 0; width: 100%; height: 4px;
+    background: transparent; z-index: 1001;
+}
+.progress-bar {
+    height: 100%; background: var(--accent); width: 0%;
+    transition: width 0.1s;
+}
+
+/* --- 4. SKELETON LOADING (Updated with Variables) --- */
+.skeleton-wrapper { padding-top: 3rem; animation: pulse 1.5s infinite; }
+.sk-img { width: 100%; height: 400px; background: var(--bg-skeleton); border-radius: var(--radius); margin-bottom: 2rem; }
+.sk-title { height: 40px; width: 80%; background: var(--bg-skeleton); margin-bottom: 1rem; border-radius: 4px; }
+.sk-line { height: 16px; background: var(--bg-skeleton); margin-bottom: 12px; border-radius: 4px; }
+
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; }
+}
+
+/* --- 5. ARTICLE HEADER & META --- */
+#articleContent { opacity: 0; transform: translateY(20px); transition: all 0.6s ease-out; }
+#articleContent.visible { opacity: 1; transform: translateY(0); }
+
+.article-header { margin: 3rem 0 2rem; text-align: left; }
+
+.meta-top { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+
+.category-pill {
+    background: var(--accent); 
+    color: var(--text-inverse); 
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-weight: 700; font-size: 0.75rem;
+    text-transform: uppercase; letter-spacing: 0.5px;
+}
+
+.date-text {
+    font-size: 0.9rem;
+    color: var(--text-muted); /* FIXED: Menggunakan variable */
+    font-weight: 500;
+}
+
+.source-wrapper { display: block; margin-bottom: 1.5rem; }
+
+.source-text {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 1.35rem; font-weight: 700;
+    color: var(--accent); /* Tetap biru agar kontras */
+    display: inline-flex; align-items: center; gap: 8px;
+}
+
+.source-label {
+    font-size: 1rem; font-weight: 400;
+    color: var(--text-muted); /* FIXED: Menggunakan variable */
+}
+
+.article-title {
+    font-family: 'Lora', serif;
+    font-size: 2.75rem; line-height: 1.2; font-weight: 700;
+    color: var(--text-heading); /* FIXED: Putih saat dark mode */
+    letter-spacing: -0.02em;
+    transition: color 0.3s ease;
+}
+
+/* --- 6. HERO IMAGE --- */
+.hero-figure { margin: 0 0 3.5rem 0; position: relative; }
+.hero-image {
+    width: 100%; height: auto; display: block;
+    border-radius: var(--radius);
+    box-shadow: 0 20px 40px -10px rgba(0,0,0,0.15);
+}
+.image-caption {
+    margin-top: 12px; text-align: center; font-size: 0.85rem;
+    color: var(--text-muted); /* FIXED: Abu-abu yang menyesuaikan */
+    font-style: italic;
+}
+
+/* --- 7. ARTICLE BODY (TYPOGRAPHY) --- */
+.article-body {
+    font-family: 'Lora', serif;
+    font-size: 1.25rem;
+    line-height: 1.85; 
+    color: var(--text-main); /* FIXED: KUNCI PERBAIKAN DI SINI */
+    transition: color 0.3s ease;
+}
+
+.article-body p { margin-bottom: 2rem; }
+
+/* Drop Cap Styling */
+.article-body p:first-of-type::first-letter {
+    float: left; font-size: 4.5rem; line-height: 0.8;
+    font-weight: 700; margin-right: 16px; margin-top: 4px;
+    color: var(--accent);
+}
+
+/* --- 8. SOURCE BOX (FOOTER AREA) --- */
+.source-box {
+    margin-top: 4rem; padding: 2.5rem;
+    background: var(--bg-card);      /* FIXED: Background berubah gelap di dark mode */
+    border: 1px solid var(--border-color); /* FIXED: Border menyesuaikan */
+    border-radius: var(--radius); text-align: center;
+    transition: background 0.3s ease, border-color 0.3s ease;
+}
+
+.source-box h4 { 
+    margin-bottom: 8px; 
+    color: var(--text-heading); /* FIXED: Judul box jadi putih di dark mode */
+}
+
+.source-box p {
+    font-size: 0.95rem; 
+    color: var(--text-muted);   /* FIXED: Teks deskripsi menyesuaikan */
+}
+
+.btn-visit {
+    display: inline-block; margin-top: 1rem;
+    padding: 12px 24px; background: var(--accent); color: white;
+    text-decoration: none; border-radius: 30px; font-weight: 600;
+    transition: background 0.2s, transform 0.2s;
+}
+.btn-visit:hover { 
+    background: #1d4ed8; transform: translateY(-2px); 
+    box-shadow: 0 10px 20px -5px rgba(37, 99, 235, 0.4); 
+}
+
+/* --- 9. RESPONSIVE --- */
+@media (max-width: 768px) {
+    .article-title { font-size: 2rem; }
+    .article-body { font-size: 1.125rem; }
+    .sk-img { height: 250px; }
+}
