@@ -4,8 +4,8 @@ A news website that recommends articles based on user personalization and the us
 
 ## 🖥️ Live Demo
 
-- Frontend (UI) :
-- Backend (API) : 
+- Frontend (UI) : https://indonesia-news-recommender-system.vercel.app/ (Vercel)
+- Backend (API) : https://sandking-indonesian-news-recommender.hf.space/run/api/docs (Hugging Face Spaces)
 
 ## 🚀 Key Features
 1. **Article recommendations powered by FAISS (Facebook AI Similarity Search) to compute vector similarity between a user’s reading history and the news database.**
